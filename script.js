@@ -37,7 +37,7 @@ let currentCard;
 let previousCard;
 let currentWords;
 
-let foreignWords = [
+const foreignWords = [
     new ForeignWord('education', 'образование', 'образование необходимо для развития'),
     new ForeignWord('garden', 'сад', 'у бабушки в деревне красивый цветочный сад'),
     new ForeignWord('elephant', 'слон', 'слон - самое крупное наземное животное на Земле'),
@@ -85,7 +85,7 @@ backButton.addEventListener('click', () => {
 
 
 shuffleWordsButton.addEventListener('click', () => {
-    foreignWords = shuffle(foreignWords);
+    shuffle(foreignWords);
     replaceTestCard(currentWordPosition);
 });
 
@@ -96,11 +96,6 @@ function replaceTestCard(wordPosition) {
     translation.querySelector("h1").textContent = currentForeignWord.translation;
     translation.querySelector("span").textContent = currentForeignWord.example;
 }
-
-shuffleWordsButton.addEventListener('click', () => {
-    foreignWords = shuffle(foreignWords);
-    replaceTestCard(currentWordPosition);
-});
 
 
 examModeButton.addEventListener('click', () => {
@@ -250,7 +245,8 @@ function getShuffledWords() {
         wordsAndTranslations.push(foreignWord.word);
         wordsAndTranslations.push(foreignWord.translation);
     });
-    return shuffle(wordsAndTranslations);
+    shuffle(wordsAndTranslations);
+    return wordsAndTranslations;
 }
 
 function shuffle(array) {
@@ -261,5 +257,4 @@ function shuffle(array) {
         currentIndex--;
         [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
-    return array;
 }
